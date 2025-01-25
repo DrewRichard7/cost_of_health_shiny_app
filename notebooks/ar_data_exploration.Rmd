@@ -4,8 +4,10 @@ output: html_document
 ---
 
 ```{r}
+# global.R
 library(tidyverse)
 library(shiny)
+library(readxl)
 ```
 
 ```{r}
@@ -39,6 +41,8 @@ urbpop_as_pct_total <- read_csv('../data/urban_pop_pct_tot.csv') |>
   select(`Series Name`:`Country Code`, `1960 [YR1960]`:`2023 [YR2023]`)
 petersen_kff_data <- read_csv('../data/petersen_KFF_data.csv')
 continents_countries <- read_csv('../data/continents.csv')
+ghed_data <- read_excel('../data/GHED_data.xlsx')
+nha_indicators <- read_excel('../data/NHA_indicators.xlsx')
 ```
 
 ```{r}
@@ -53,7 +57,26 @@ overweight_adults
 ```
 
 ```{r}
+nha_indicators
+```
 
+
+```{r}
+nha_indicators |> 
+  drop_na(Countries) |> 
+  rename('Country' = Countries) |> 
+  pivot_longer(
+    cols = c('2000':'2022'),
+    names_to = 'Year',
+    values_to = 'Health_exp_percap'
+  ) |> 
+  select(Country, Year, Health_exp_percap)
+
+# pivot_longer(
+#                 cols = c(pct_below_bsc, pct_bsc, pct_prof, pct_adv),
+#                 names_to = "Performance_Level",
+#                 values_to = "Percentage"
+#             )
 ```
 
 ```{r}
