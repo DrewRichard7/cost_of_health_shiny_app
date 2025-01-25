@@ -70,13 +70,10 @@ nha_indicators |>
     names_to = 'Year',
     values_to = 'Health_exp_percap'
   ) |> 
-  select(Country, Year, Health_exp_percap)
+  select(Country, Year, Health_exp_percap) |> 
+  mutate_at(c('Year', 'Health_exp_percap'), as.numeric)
 
-# pivot_longer(
-#                 cols = c(pct_below_bsc, pct_bsc, pct_prof, pct_adv),
-#                 names_to = "Performance_Level",
-#                 values_to = "Percentage"
-#             )
+
 ```
 
 ```{r}
