@@ -1,0 +1,41 @@
+---
+title: "ar_data_exploration"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(shiny)
+```
+
+```{r}
+who_overweight_adults <- read_csv('../data/who_overweight_adults.csv')
+overweight_adults <- read_csv('../data/overweight_adults.csv') |> 
+  filter(`Series Name` %in% 'Prevalence of overweight (% of adults)') |> 
+  select(`Series Name`:`Country Code`, `1975 [YR1975]`:`2016 [YR2016]`)
+who_overweight_adults
+overweight_adults
+```
+
+```{r}
+who_overweight_adults |> 
+  distinct(`Location`) |> 
+  count()
+  
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
