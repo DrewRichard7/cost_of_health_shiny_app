@@ -44,6 +44,11 @@ The MVP will include:
 
 [4] Health Nutrition and Population Statistics | DataBank.Available at [https://databank.worldbank.org/source/health-nutrition-and-population-statistics#](https://databank.worldbank.org/source/health-nutrition-and-population-statistics#).
 
+[5] Global Burden of Disease Collaborative Network.
+Global Burden of Disease Study 2021 (GBD 2021) Results.
+Seattle, United States: Institute for Health Metrics and Evaluation (IHME), 2022.
+Available from [https://vizhub.healthdata.org/gbd-results/](https://vizhub.healthdata.org/gbd-results/).
+
 ## Known Issues and Challenges
 
 establishing relationships between the datasets may prove to be a challenge, since the data come from different sources and will be formatted differently. There will also be some navigating times and ensuring data line up.
