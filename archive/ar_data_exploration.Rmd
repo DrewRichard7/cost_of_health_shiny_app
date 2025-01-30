@@ -1,0 +1,89 @@
+---
+title: "ar_data_exploration"
+output: html_document
+---
+
+```{r}
+# global.R
+library(tidyverse)
+library(shiny)
+library(readxl)
+```
+
+```{r}
+who_overweight_adults <- read_csv('../data/who_overweight_adults.csv')
+overweight_adults <- read_csv('../data/overweight_adults.csv') |> 
+  filter(`Series Name` %in% 'Prevalence of overweight (% of adults)') |> 
+  select(`Series Name`:`Country Code`, `1975 [YR1975]`:`2016 [YR2016]`)
+oecd_healthcare <- read_csv('../data/OECD_healthcare_coverage.csv') |> 
+  select(REF_AREA:`Unit multiplier`) |> 
+  filter(UNIT_MEASURE == 'PT_POP')
+hypertension_adults <- read_csv('../data/hypertension_adults.csv') |> 
+  filter(`Series Name` %in% 'Prevalence of hypertension (% of adults ages 30-79)') |> 
+  select(`Series Name`:`Country Code`, `1990 [YR1990]`:`2019 [YR2019]`)
+hypertension_female <- read_csv('../data/hypertension_female.csv') |> 
+  filter(`Series Name` %in% 'Prevalence of hypertension, female (% of female adults ages 30-79)') |> 
+  select(`Series Name`:`Country Code`, `1990 [YR1990]`:`2019 [YR2019]`)
+hypertension_male <- read_csv('../data/hypertension_male.csv') |> 
+  filter(`Series Name` %in% 'Prevalence of hypertension, male (% of male adults ages 30-79)') |> 
+  select(`Series Name`:`Country Code`, `1990 [YR1990]`:`2019 [YR2019]`)
+overweight_female <- read_csv('../data/overweight_female.csv') |> 
+  filter(`Series Name` %in% 'Prevalence of overweight, female (% of female adults)') |> 
+  select(`Series Name`:`Country Code`, `1975 [YR1975]`:`2016 [YR2016]`)
+overweight_male <- read_csv('../data/overweight_male.csv') |> 
+  filter(`Series Name` %in% 'Prevalence of overweight, male (% of male adults)') |> 
+  select(`Series Name`:`Country Code`, `1975 [YR1975]`:`2016 [YR2016]`)
+urban_pop <- read_csv('../data/urban_population.csv') |> 
+  filter(`Series Name` %in% 'Urban population') |> 
+  select(`Series Name`:`Country Code`, `1960 [YR1960]`:`2023 [YR2023]`)
+urbpop_as_pct_total <- read_csv('../data/urban_pop_pct_tot.csv') |> 
+  filter(`Series Name` %in% 'Urban population (% of total population)') |> 
+  select(`Series Name`:`Country Code`, `1960 [YR1960]`:`2023 [YR2023]`)
+petersen_kff_data <- read_csv('../data/petersen_KFF_data.csv')
+continents_countries <- read_csv('../data/continents.csv')
+ghed_data <- read_excel('../data/GHED_data.xlsx')
+nha_indicators <- read_excel('../data/NHA_indicators.xlsx')
+```
+
+```{r}
+who_overweight_adults |> 
+  distinct(`Location`) |> 
+  count()
+
+who_overweight_adults |> 
+  distinct(`Location`) |> 
+  count()
+overweight_adults
+```
+
+```{r}
+nha_indicators
+```
+
+
+```{r}
+nha_indicators |> 
+  drop_na(Countries) |> 
+  rename('Country' = Countries) |> 
+  pivot_longer(
+    cols = c('2000':'2022'),
+    names_to = 'Year',
+    values_to = 'Health_exp_percap'
+  ) |> 
+  select(Country, Year, Health_exp_percap) |> 
+  mutate_at(c('Year', 'Health_exp_percap'), as.numeric)
+
+
+```
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
